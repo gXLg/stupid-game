@@ -1,1 +1,38 @@
+26 01 2021
+Started working
+Learned basic funtions of pygame
+Built a window with a square
+Added key listener to WASD
+Added sprint function on LSHIFT
 
+27 01 2021
+Realized idea with cooldown
+Created colorscheme, map and physics
+Added exit and restart buttons
+Added fire buttons on HJK
+Added function barrier to J
+
+28 01 2021
+Added bots and tracking function
+Made bots hit player
+
+29 01 2021
+Added class Object for drawing particles and effects
+Made elemental attacks
+
+30 01 2021
+Added hierarchy of elements
+Created two copies host.py and client.py
+
+31 01 2021
+Learned about sending object data
+Created player2
+Added key listener on host for WASD, LSHIFT
+
+01 02 2021
+Changed manual pickle and socket to multiprocess.connection
+
+TO DO:
+Fix elemental damage on player2
+Put game.py, host.py and client.py into one
+Add a graphical menu
