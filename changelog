@@ -39,3 +39,5 @@ Put game.py, host.py and client.py into one
 
 TO DO:
 Add a graphical menu
+Fix exit issue
+(maybe) Add compression to sent variable
