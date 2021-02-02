@@ -1,0 +1,15 @@
+colors [ 0 ] = int ( "1c2541", 16 )
+colors [ 1 ] = int ( "3a506b", 16 )
+colors [ 2 ] = int ( "7180ac", 16 )
+
+colors [ "air" ] = int ( "e8f1f2", 16 )
+colors [ "air_tired" ] = int ( "333333", 16 )
+
+colors [ "fire" ] = int ( "d7263d", 16 )
+colors [ "fire_tired" ] = int ( "c1666b", 16 )
+
+colors [ "water" ] = int ( "44cf6c", 16 )
+colors [ "water_tired" ] = int ( "568259", 16 )
+
+colors [ "earth" ] = int ( "1a1009", 16 )
+colors [ "earth_tired" ] = int ( "3d3b30", 16 )
