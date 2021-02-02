@@ -26,7 +26,7 @@ bots - amount of bots to play with, default 2
 
 $`python game.py join [address] [port]`
 
-to join a hostd game
+to join a hosted game
 
 address - required, address to connect to
 
