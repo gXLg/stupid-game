@@ -31,8 +31,11 @@ Added key listener on host for WASD, LSHIFT
 
 01 02 2021
 Changed manual pickle and socket to multiprocess.connection
+Fixed elemental damage on player2
+
+02 02 2021
+Put game.py, host.py and client.py into one
+
 
 TO DO:
-Fix elemental damage on player2
-Put game.py, host.py and client.py into one
 Add a graphical menu
