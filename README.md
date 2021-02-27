@@ -32,7 +32,7 @@ address - required, address to connect to
 
 port - port to connect to, default 2281
 
-# controll
+# control
 
 WASD - typical movement
 
