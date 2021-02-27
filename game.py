@@ -31,7 +31,7 @@ elif join : from multiprocessing.connection import Client
 pygame.init ( )
 
 window = pygame.display.set_mode ( ( 512, 512 ))
-pygame.display.set_caption ( "Stupid Game" + " (Multiplayer)" if not single else "" )
+pygame.display.set_caption ( "Stupid Game" + ( " (Multiplayer)" if not single else "" ))
 
 if not join : clock = pygame.time.Clock ( )
 font = pygame.font.SysFont ( None, 24 )
