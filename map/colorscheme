@@ -1,15 +1,13 @@
-colors [ 0 ] = int ( "1c2541", 16 )
-colors [ 1 ] = int ( "3a506b", 16 )
-colors [ 2 ] = int ( "7180ac", 16 )
+colors [ 0 ] = ( 28, 37, 65, 0 )
+colors [ 1 ] = ( 58, 80, 107, 0 )
+colors [ 2 ] = ( 113, 128, 172, 0 )
 
-colors [ "air" ] = int ( "e8f1f2", 16 )
-colors [ "air_tired" ] = int ( "333333", 16 )
+colors [ "air" ] = ( 232, 241, 242, 0 )
+colors [ "air_tired" ] = ( 51, 51, 51, 0 )                                       
+colors [ "fire" ] = ( 215, 38, 61, 0 )
+colors [ "fire_tired" ] = ( 193, 102, 107, 0 )                                   
+colors [ "water" ] = ( 68, 207, 108, 0 )
+colors [ "water_tired" ] = ( 86, 130, 89, 0 )
 
-colors [ "fire" ] = int ( "d7263d", 16 )
-colors [ "fire_tired" ] = int ( "c1666b", 16 )
-
-colors [ "water" ] = int ( "44cf6c", 16 )
-colors [ "water_tired" ] = int ( "568259", 16 )
-
-colors [ "earth" ] = int ( "1a1009", 16 )
-colors [ "earth_tired" ] = int ( "3d3b30", 16 )
+colors [ "earth" ] = ( 26, 16, 9, 0 )
+colors [ "earth_tired" ] = ( 61, 59, 48, 0 )
