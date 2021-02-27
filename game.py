@@ -317,7 +317,7 @@ while play :
         if single :
           player_ = player
           kills += 1
-        if ( player.body.x - i.body.x ) ** 2 + ( player.body.y - i.body.y ) ** 2 < ( player2.body.x - i.body.x ) ** 2 + ( player2.body.y - i.body.y ) ** 2 :
+        elif ( player.body.x - i.body.x ) ** 2 + ( player.body.y - i.body.y ) ** 2 < ( player2.body.x - i.body.x ) ** 2 + ( player2.body.y - i.body.y ) ** 2 :
           player_ = player
           kills += 1
         else :
