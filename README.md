@@ -4,12 +4,12 @@ A little pygame based game
 # usage
 
 
-*GUI*:
+_GUI (without arguments)_:
 - Windows : download "game.exe" and just open it
 - Unix : start game.py with python3
 
 
-*With arguments*:
+_conole (with arguments)_:
 - $`python game.py single [bots]`
   - play in single mode with `[bots]` amount of bots to play with (default 3)
 
@@ -23,12 +23,17 @@ Under _default_ I mean if the argument is not given or is not in allowed range
 
 # control
 
-WASD - typical movement
-
-LSHIFT ( left shift ) - run
-
-H - hit
-
-J - barrier
-
-K - magic
+_gui control_:
+- AD - left/right in switchers
+- H - submit selection
+- Q or close-Button - exit
+- port selcetion : numbers allowed from numpad and keypad
+- server selection : printable characters allowed, submission via enter-Button 
+_game control_:
+- WASD - typical movement
+- LSHIFT ( left shift ) - run
+- H - hit
+- J - barrier
+- K - magic
+- Q or close-Button - exit
+- after death : R - restart game with current options
