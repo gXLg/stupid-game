@@ -38,3 +38,7 @@ _game control_:
 - K - magic
 - Q or close-Button - exit
 - after death : R - restart game with current options
+
+#requirements
+- python 3.7 or higher
+- newest pygame module
