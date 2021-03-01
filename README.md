@@ -29,6 +29,7 @@ _gui control_:
 - Q or close-Button - exit
 - port selcetion : numbers allowed from numpad and keypad
 - server selection : printable characters allowed, submission via enter-Button 
+
 _game control_:
 - WASD - typical movement
 - LSHIFT ( left shift ) - run
