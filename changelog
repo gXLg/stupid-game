@@ -43,6 +43,8 @@ Fixed exit issue
 Fixed color mismatch
 Fixed entity removing in singleplayer
 
+01 03 2021
+Added GUI at start (still accepting arguments)
+
 TO DO:
-Add a graphical menu
 (maybe) Add compression to sent variable
