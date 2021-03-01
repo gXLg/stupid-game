@@ -25,61 +25,6 @@ def draw_game ( ) :
 clock = pygame.time.Clock ( )
 pygame.display.set_caption ( "Stupid Game" )
 
-
-menu_mode = "Singleplayer >"
-menu = True
-leave = False
-while menu :
-  clock.tick ( 60 )
-  for event in pygame.event.get ( ) :
-    if event.type == pygame.QUIT :
-      menu = False
-      leave = True
-    if event.type == pygame.KEYDOWN :
-      if event.key == pygame.K_a :
-        menu_mode = "Singleplayer >"
-        single = True
-      if event.key == pygame.K_d :
-        menu_mode = "< Multiplayer"
-        single = False
-      if event.key == pygame.K_h :
-        menu = False
-  draw_game ( )
-  splash = font.render ( menu_mode, True, colors [ 0 ] )
-  window.blit ( splash, ( 40, 40 ))
-  pygame.display.flip ( )
-
-if leave :
-  pygame.quit ( )
-  quit ( )
-
-if not join :
-  bots = 3
-  menu = True
-  while menu :
-    for event in pygame.event.get ( ) :
-      if event.type == pygame.QUIT :
-        menu = False
-        leave = True
-      if event.type == pygame.KEYDOWN :
-        if event.key == pygame.K_a :
-          if bots > 0 : bots -= 1
-        if event.key == pygame.K_d :
-          if bots < 20 : bots += 1
-        if event.key == pygame.K_h :
-          menu = False
-  draw_game ( )
-  splash = font.render ( "- " + str ( bots ) + " +", True, colors [ 0 ] )
-  window.blit ( splash, ( 40, 40 ))
-  pygame.display.flip ( )
-
-if leave :
-  pygame.quit ( )
-  quit ( )
-
-quit ( )
-
-"""
 try :
   single = ( argv [ 1 ] == "single" )
   host = ( argv [ 1 ] == "host" )
@@ -91,24 +36,198 @@ try :
     try : port = int ( argv [ 2 ])
     except : port = 2281
     try : bots = int ( argv [ 3 ])
-    except : bots = 2
+    except : bots = 3
   elif join :
-    address = argv [ 2 ]
+    server = argv [ 2 ]
     try : port = int ( argv [ 3 ])
     except : port = 2281
   else :
     error
 except :
-  print ( "Wrong usage" )
-  quit ( )
-"""
+  print ( "Wrong args, trying GUI" )
 
-quit ( )
+  join = False
+  host = False
+  single = True
+
+  menu_mode = "Singleplayer >"
+  menu = True
+  leave = False
+  while menu :
+    clock.tick ( 60 )
+    for event in pygame.event.get ( ) :
+      if event.type == pygame.QUIT :
+        menu = False
+        leave = True
+      if event.type == pygame.KEYDOWN :
+        if event.key == pygame.K_a :
+          menu_mode = "Singleplayer >"
+          single = True
+        elif event.key == pygame.K_d :
+          menu_mode = "< Multiplayer"
+          single = False
+        elif event.key == pygame.K_h :
+          menu = False
+        elif event.key == pygame.K_q :
+          menu = False
+          leave = True
+    draw_game ( )
+    splash = font.render ( menu_mode, True, colors [ 0 ] )
+    window.blit ( splash, ( 40, 40 ))
+    pygame.display.flip ( )
+
+  if leave :
+    pygame.quit ( )
+    quit ( )
+
+  if not single :
+
+    join = True
+    host = False
+
+    menu_mode = "Join >"
+    menu = True
+    leave = False
+    while menu :
+      clock.tick ( 60 )
+      for event in pygame.event.get ( ) :
+        if event.type == pygame.QUIT :
+          menu = False
+          leave = True
+        if event.type == pygame.KEYDOWN :
+          if event.key == pygame.K_a :
+            menu_mode = "Join >"
+            join = True
+            host = False
+          elif event.key == pygame.K_d :
+            menu_mode = "< Host"
+            join = False
+            host = True
+          elif event.key == pygame.K_h :
+            menu = False
+          elif event.key == pygame.K_q :
+            menu = False
+            leave = True
+      draw_game ( )
+      splash = font.render ( menu_mode, True, colors [ 0 ] )
+      window.blit ( splash, ( 40, 40 ))
+      pygame.display.flip ( )
+    if leave :
+      pygame.quit ( )
+      quit ( )
+    if host :
+      prompt = "Port to host your game (default 2281): "
+      port = ""
+      menu = True
+      leave = False
+      while menu :
+        clock.tick ( 60 )
+        for event in pygame.event.get ( ) :
+          if event.type == pygame.QUIT :
+            menu = False
+            leave = True
+          if event.type == pygame.KEYDOWN :
+            if event.unicode.isdigit ( ) :
+              port += event.unicode
+            elif event.key == pygame.K_BACKSPACE :
+              port = port [ : -1 ]
+            elif event.key == pygame.K_h :
+              menu = False
+            elif event.key == pygame.K_q :
+              menu = False
+              leave = True
+        draw_game ( )
+        splash = font.render ( prompt + port, True, colors [ 0 ] )
+        window.blit ( splash, ( 40, 40 ))
+        pygame.display.flip ( )
+      if port : port = int ( port )
+      else : port = 2281
+    else :
+      prompt = "Server to connect to (default kemuri.ddns.net): "
+      server = ""
+      menu = True
+      leave = False
+      while menu :
+        clock.tick ( 60 )
+        for event in pygame.event.get ( ) :
+          if event.type == pygame.QUIT :
+            menu = False
+            leave = True
+          if event.type == pygame.KEYDOWN :
+            if event.key == pygame.K_BACKSPACE :
+              server = server [ : -1 ]
+            elif event.key == pygame.K_RETURN :
+              menu = False
+            elif event.unicode :
+              server += event.unicode
+        draw_game ( )
+        splash = font.render ( prompt + server, True, colors [ 0 ] )
+        window.blit ( splash, ( 40, 40 ))
+        pygame.display.flip ( )
+      if not server : server = "kemuri.ddns.net"
+      if leave :
+        pygame.quit ( )
+        quit ( )
+      prompt = "Port to connect your game (default 2281): "
+      port = ""
+      menu = True
+      leave = False
+      while menu :
+        clock.tick ( 60 )
+        for event in pygame.event.get ( ) :
+          if event.type == pygame.QUIT :
+            menu = False
+            leave = True
+          if event.type == pygame.KEYDOWN :
+            if event.unicode.isdigit ( ) :
+              port += event.unicode
+            if event.key == pygame.K_BACKSPACE :
+              port = port [ : -1 ]
+            if event.key == pygame.K_h :
+              menu = False
+            if event.key == pygame.K_q :
+              menu = False
+              leave = True
+        draw_game ( )
+        splash = font.render ( prompt + port, True, colors [ 0 ] )
+        window.blit ( splash, ( 40, 40 ))
+        pygame.display.flip ( )
+      if port : port = int ( port )
+      else : port = 2281
+
+  if leave :
+    pygame.quit ( )
+    quit ( )
+
+  if not join :
+    bots = 3
+    menu = True
+    while menu :
+      clock.tick ( 60 )
+      for event in pygame.event.get ( ) :
+        if event.type == pygame.QUIT :
+          menu = False
+          leave = True
+        if event.type == pygame.KEYDOWN :
+          if event.key == pygame.K_a :
+            if bots > 0 : bots -= 1
+          if event.key == pygame.K_d :
+            if bots < 20 : bots += 1
+          if event.key == pygame.K_h :
+            menu = False
+      draw_game ( )
+      splash = font.render ( "Number of bots in the game: - " + str ( bots ) + " +", True, colors [ 0 ] )
+      window.blit ( splash, ( 40, 40 ))
+      pygame.display.flip ( )
+
+  if leave :
+    pygame.quit ( )
+    quit ( )
 
 if host : from multiprocessing.connection import Listener
 elif join : from multiprocessing.connection import Client
 
-pygame.display.set_caption ( "Stupid Game" + " (Multiplayer)" if not single else "" )
+pygame.display.set_caption ( "Stupid Game" + ( " (Multiplayer)" if not single else "" ))
 
 class Entity :
 
@@ -284,22 +403,22 @@ if host :
     print ( "Could not host game" )
     pygame.quit ( )
     quit ( )
-elif join :
- try :
-   client = Client ( ( address, port ))
- except :
-   print ( "Could not connect" )
-   pygame.quit ( )
-   quit ( )
 
 play = True
 while play :
   draw_game ( )
+  waiting = font.render ( "Waiting for connection..", True, colors [ 0 ] )
+  window.blit ( waiting, ( 160, 250 ))
+  pygame.display.flip ( )
   if host :
-    waiting = font.render ( "Waiting for connection..", True, colors [ 0 ] )
-    window.blit ( waiting, ( 160, 250 ))
-    pygame.display.flip ( )
     conn = server_sock.accept ( )
+  if join :
+    try :
+      client = Client ( ( server, port ))
+    except :
+      print ( "Could not connect" )
+      pygame.quit ( )
+      quit ( )
   run = True
   kills = 0
   kills2 = 0
@@ -429,6 +548,7 @@ while play :
       top_objects = var [ "top_objects" ]
 
   if host : conn.close ( )
+  if join : client.close ( )
   draw_game ( )
   if host :
     gg = font.render ( "You - Health: " + str ( player.cooldown ) + " Kills: " + str ( kills ), True, colors [ 0 ] )
