@@ -3,6 +3,83 @@ from time import sleep
 from random import choice, randrange
 from sys import argv
 
+pygame.init ( )
+window = pygame.display.set_mode ( ( 512, 512 ))
+
+font = pygame.font.SysFont ( None, 24 )
+
+colors = { }
+for i in open ( "map/colorscheme" ).readlines ( ) : exec ( i )
+game = [ ]
+for i in open ( "map/game" ).readlines ( ) : game += eval ( "[[" + i.replace ( " ", "," ) + "]]" )
+physics = { }
+for i in open ( "map/physics" ).readlines ( ) : exec ( i )
+
+def draw_game ( ) :
+  for y, i in enumerate ( game ) :
+    for x, j in enumerate ( i ) :
+      cords = ( x * 32, y * 32 )
+      f = pygame.Rect ( cords [ 0 ], cords [ 1 ], 32, 32 )
+      pygame.draw.rect ( window, colors [ j ], f )
+
+clock = pygame.time.Clock ( )
+pygame.display.set_caption ( "Stupid Game" )
+
+
+menu_mode = "Singleplayer >"
+menu = True
+leave = False
+while menu :
+  clock.tick ( 60 )
+  for event in pygame.event.get ( ) :
+    if event.type == pygame.QUIT :
+      menu = False
+      leave = True
+    if event.type == pygame.KEYDOWN :
+      if event.key == pygame.K_a :
+        menu_mode = "Singleplayer >"
+        single = True
+      if event.key == pygame.K_d :
+        menu_mode = "< Multiplayer"
+        single = False
+      if event.key == pygame.K_h :
+        menu = False
+  draw_game ( )
+  splash = font.render ( menu_mode, True, colors [ 0 ] )
+  window.blit ( splash, ( 40, 40 ))
+  pygame.display.flip ( )
+
+if leave :
+  pygame.quit ( )
+  quit ( )
+
+if not join :
+  bots = 3
+  menu = True
+  while menu :
+    for event in pygame.event.get ( ) :
+      if event.type == pygame.QUIT :
+        menu = False
+        leave = True
+      if event.type == pygame.KEYDOWN :
+        if event.key == pygame.K_a :
+          if bots > 0 : bots -= 1
+        if event.key == pygame.K_d :
+          if bots < 20 : bots += 1
+        if event.key == pygame.K_h :
+          menu = False
+  draw_game ( )
+  splash = font.render ( "- " + str ( bots ) + " +", True, colors [ 0 ] )
+  window.blit ( splash, ( 40, 40 ))
+  pygame.display.flip ( )
+
+if leave :
+  pygame.quit ( )
+  quit ( )
+
+quit ( )
+
+"""
 try :
   single = ( argv [ 1 ] == "single" )
   host = ( argv [ 1 ] == "host" )
@@ -24,25 +101,14 @@ try :
 except :
   print ( "Wrong usage" )
   quit ( )
+"""
+
+quit ( )
 
 if host : from multiprocessing.connection import Listener
 elif join : from multiprocessing.connection import Client
 
-pygame.init ( )
-
-window = pygame.display.set_mode ( ( 512, 512 ))
-pygame.display.set_caption ( "Stupid Game" + ( " (Multiplayer)" if not single else "" ))
-
-if not join : clock = pygame.time.Clock ( )
-font = pygame.font.SysFont ( None, 24 )
-
-colors = { }
-for i in open ( "map/colorscheme" ).readlines ( ) : exec ( i )
-game = [ ]
-for i in open ( "map/game" ).readlines ( ) : game += eval ( "[[" + i.replace ( " ", "," ) + "]]" )
-physics = { }
-for i in open ( "map/physics" ).readlines ( ) : exec ( i )
-
+pygame.display.set_caption ( "Stupid Game" + " (Multiplayer)" if not single else "" )
 
 class Entity :
 
@@ -205,13 +271,6 @@ class Object :
       s.blit ( num, self.cords )
     window.blit ( s, ( 0, 0 ))
     self.cooldown -= 1
-
-def draw_game ( ) :
-  for y, i in enumerate ( game ) :
-    for x, j in enumerate ( i ) :
-      cords = ( x * 32, y * 32 )
-      f =  pygame.Rect ( cords [ 0 ], cords [ 1 ], 32, 32 )
-      pygame.draw.rect ( window, colors [ j ], f )
 
 def new ( ) :
   random = randrange ( 100 )
@@ -388,7 +447,9 @@ while play :
   x = True
   while x :
     for event in pygame.event.get ( ) :
-        if event.type == pygame.QUIT : x = False
+        if event.type == pygame.QUIT :
+          x = False
+          play = False
         if event.type == pygame.KEYDOWN:
           if event.key == pygame.K_q :
             play = False
@@ -397,4 +458,4 @@ while play :
             run = True
             x = False
 pygame.quit ( )
-exit ( )
+quit ( )
