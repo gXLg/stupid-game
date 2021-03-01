@@ -9,11 +9,52 @@ window = pygame.display.set_mode ( ( 512, 512 ))
 font = pygame.font.SysFont ( None, 24 )
 
 colors = { }
-for i in open ( "map/colorscheme" ).readlines ( ) : exec ( i )
+try :
+  for i in open ( "map/colorscheme" ).readlines ( ) : exec ( i )
+except :
+  colors [ 0 ] = ( 28, 37, 65, 0 )
+  colors [ 1 ] = ( 58, 80, 107, 0 )
+  colors [ 2 ] = ( 113, 128, 172, 0 )
+
+  colors [ "air" ] = ( 232, 241, 242, 0 )
+  colors [ "air_tired" ] = ( 51, 51, 51, 0 )
+  colors [ "fire" ] = ( 215, 38, 61, 0 )
+  colors [ "fire_tired" ] = ( 193, 102, 107, 0 )
+  colors [ "water" ] = ( 68, 207, 108, 0 )
+  colors [ "water_tired" ] = ( 86, 130, 89, 0 )
+
+  colors [ "earth" ] = ( 26, 16, 9, 0 )
+  colors [ "earth_tired" ] = ( 61, 59, 48, 0 )
+
 game = [ ]
-for i in open ( "map/game" ).readlines ( ) : game += eval ( "[[" + i.replace ( " ", "," ) + "]]" )
+try :
+  gamestr = open ( "map/game" ).read ( )
+except :
+  gamestr = """0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 1 2 1 2 1 2 1 2 1 2 1 2 1 2 0
+0 2 1 1 1 1 1 2 1 2 1 1 1 2 1 0
+0 1 2 2 2 1 2 1 2 1 1 1 2 1 2 0
+0 2 1 2 2 2 1 2 1 2 1 1 1 2 1 0
+0 1 2 1 2 1 2 1 2 1 2 1 1 1 2 0
+0 2 1 1 2 1 1 2 1 2 1 1 1 2 1 0
+0 1 2 1 2 1 1 1 2 1 2 1 2 1 2 0
+0 2 1 2 1 1 1 1 1 2 1 2 1 2 1 0
+0 1 2 1 1 1 2 1 2 1 2 1 2 1 2 0
+0 2 1 2 1 2 1 1 1 1 1 1 1 2 1 0
+0 2 2 1 2 1 2 1 2 1 1 1 2 1 2 0
+0 2 2 2 1 2 1 1 1 2 1 2 1 2 1 0
+0 2 2 2 2 1 2 1 2 1 2 1 2 1 2 0
+0 2 2 2 2 2 2 2 1 2 1 2 1 2 1 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"""
+
+for i in gamestr.split ( "\n" ) : game += eval ( "[[" + i.replace ( " ", "," ) + "]]" )
+
 physics = { }
-for i in open ( "map/physics" ).readlines ( ) : exec ( i )
+try :
+  for i in open ( "map/physics" ).readlines ( ) : exec ( i )
+except :
+  solid = [ 0 ]
+  air = [ 1, 2 ]
 
 def draw_game ( ) :
   for y, i in enumerate ( game ) :
