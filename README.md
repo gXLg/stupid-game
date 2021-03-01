@@ -2,35 +2,24 @@
 A little pygame based game
 
 # usage
-From console without root:
 
 
-
-$`python game.py single [bots]`
-
-to play in singleplayer
-
-bots - amount of bots to play with, default 3
+*GUI*:
+- Windows : download "game.exe" and just open it
+- Unix : start game.py with python3
 
 
+*With arguments*:
+- $`python game.py [single|join|host] [address] [port] [bots]`
+  - play in single mode with `[bots]` amount of bots to play with (default 3)
 
-$`python game.py host [port] [bots]`
+- $`python game.py host [port] [bots]`
+  - to host your game on `[port]` (default 2281) with `[bots]` amount of bots (default 3)
 
-to host your game
+- $`python game.py join [server] [port]`
+  - to join a hosted game on `[server]` (default kemuri.ddns.net) on `[port]` (default 2281)
 
-port - port to host on, default 2281
-
-bots - amount of bots to play with, default 2
-
-
-
-$`python game.py join [address] [port]`
-
-to join a hosted game
-
-address - required, address to connect to
-
-port - port to connect to, default 2281
+Under _default_ I mean if the argument is not given or is not in allowed range
 
 # control
 
