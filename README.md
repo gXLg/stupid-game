@@ -39,6 +39,6 @@ _game control_:
 - Q or close-Button - exit
 - after death : R - restart game with current options
 
-#requirements
+# requirements
 - python 3.7 or higher
 - newest pygame module
