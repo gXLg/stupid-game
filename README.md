@@ -10,7 +10,7 @@ A little pygame based game
 
 
 *With arguments*:
-- $`python game.py [single|join|host] [address] [port] [bots]`
+- $`python game.py single [bots]`
   - play in single mode with `[bots]` amount of bots to play with (default 3)
 
 - $`python game.py host [port] [bots]`
