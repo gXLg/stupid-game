@@ -107,7 +107,7 @@ except :
   menu_mode = "Singleplayer >"
   menu = True
   leave = False
-  update = False
+  update = ( False, "" )
   while menu :
     clock.tick ( 60 )
     for event in pygame.event.get ( ) :
@@ -126,7 +126,11 @@ except :
         elif event.key == pygame.K_k :
           menu = False
           leave = True
-          update = True
+          update = ( True, "git" )
+        elif event.key == pygame.K_j :
+          menu = False
+          leave = True
+          update = ( True, "exe" )
         elif event.key == pygame.K_q :
           menu = False
           leave = True
@@ -136,7 +140,7 @@ except :
     pygame.display.flip ( )
 
   if leave :
-    if update :
+    if update [ 0 ] :
 
       import urllib.request
       import os
@@ -147,22 +151,34 @@ except :
       try :
         with tempfile.TemporaryDirectory ( ) as dir :
           splashy ( "Downloading..." )
-          try : urllib.request.urlretrieve ( "https://github.com/gXLg/stupid-game/archive/main.zip", dir + "/game.zip" )
-          except : game_error ( "Error downloading" )
+          if update [ 1 ] == "git" :
+            try : urllib.request.urlretrieve ( "https://github.com/gXLg/stupid-game/archive/main.zip", dir + "/game.zip" )
+            except : game_error ( "Error downloading" )
+          else :
+            import requests
+            d = requests.get ( "https://api.github.com/repos/gxlg/stupid-game/releases/latest" ).json ( ) [ "assets" ] [ 0 ] [ "browser_download_url" ]
+            try : urllib.request.urlretrieve ( d, dir + "/game.exe" )
+            except : game_error ( "Error downloading" )
 
-          splashy ( "Extracting..." )
-          try :
-            os.mkdir ( dir + "/unpack" )
-            shutil.unpack_archive ( os.path.abspath ( os.path.expanduser ( dir )) + "/game.zip", dir + "/unpack" )
-          except : game_error ( "Error extracting" )
+          if update [ 1 ] == "git" :
+            splashy ( "Extracting..." )
+            try :
+              os.mkdir ( dir + "/unpack" )
+              shutil.unpack_archive ( os.path.abspath ( os.path.expanduser ( dir )) + "/game.zip", dir + "/unpack" )
+            except : game_error ( "Error extracting" )
 
           splashy ( "Getting Desktop directory..." )
           try : desktop = os.path.expanduser ( "~/Desktop" )
           except : game_error ( "Error getting" )
 
           splashy ( "Copying..." )
-          try : shutil.copytree ( dir + "/unpack/stupid-game-main", desktop + "/Stupid Game")
-          except : game_error ( "Error copying" )
+          if update [ 1 ] == "git" :
+            try : shutil.copytree ( dir + "/unpack/stupid-game-main", desktop + "/Stupid Game")
+            except : game_error ( "Error copying" )
+          else :
+            try : shutil.copytree ( dir, desktop + "/Stupid Game")
+            except : game_error ( "Error copying" )
+
       except : game_error ( "Error" )
 
       game_error ( "Success" )
