@@ -24,7 +24,7 @@ Under _default_ I mean if the argument is not given or is not in allowed range
 # control
 
 _gui control_:
-- at the beginning : K - update the game and save to desktop
+- at the beginning : K - download newest game repository
 - AD - left/right in switchers
 - H - submit selection
 - Q or close-Button - exit
