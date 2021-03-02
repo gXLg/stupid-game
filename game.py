@@ -1,5 +1,4 @@
 import pygame
-from time import sleep
 from random import choice, randrange
 from sys import argv
 
@@ -66,6 +65,19 @@ def draw_game ( ) :
 clock = pygame.time.Clock ( )
 pygame.display.set_caption ( "Stupid Game" )
 
+def splashy ( txt ) :
+  draw_game ( )
+  splash = font.render ( txt, True, colors [ 0 ] )
+  window.blit ( splash, ( 180, 250 ))
+  pygame.display.flip ( )
+
+def game_error ( error_txt ) :
+  splashy ( error_txt )
+  from time import sleep
+  sleep ( 5 )
+  pygame.quit ( )
+  quit ( )
+
 try :
   single = ( argv [ 1 ] == "single" )
   host = ( argv [ 1 ] == "host" )
@@ -79,7 +91,8 @@ try :
     try : bots = int ( argv [ 3 ])
     except : bots = 3
   elif join :
-    server = argv [ 2 ]
+    try : server = argv [ 2 ]
+    except : server = "kemuri.ddns.net"
     try : port = int ( argv [ 3 ])
     except : port = 2281
   else :
@@ -94,6 +107,7 @@ except :
   menu_mode = "Singleplayer >"
   menu = True
   leave = False
+  update = False
   while menu :
     clock.tick ( 60 )
     for event in pygame.event.get ( ) :
@@ -109,6 +123,10 @@ except :
           single = False
         elif event.key == pygame.K_h :
           menu = False
+        elif event.key == pygame.K_k :
+          menu = False
+          leave = True
+          update = True
         elif event.key == pygame.K_q :
           menu = False
           leave = True
@@ -118,8 +136,36 @@ except :
     pygame.display.flip ( )
 
   if leave :
-    pygame.quit ( )
-    quit ( )
+    if update :
+
+      import urllib.request
+      import os
+      import tempfile
+      import shutil
+
+      splashy ( "Creating temporary directory..." )
+      try :
+        with tempfile.TemporaryDirectory ( ) as dir :
+          splashy ( "Downloading..." )
+          try : urllib.request.urlretrieve ( "https://github.com/gXLg/stupid-game/archive/main.zip", dir + "/game.zip" )
+          except : game_error ( "Error downloading" )
+
+          splashy ( "Extracting..." )
+          try :
+            os.mkdir ( dir + "/unpack" )
+            shutil.unpack_archive ( os.path.abspath ( os.path.expanduser ( dir )) + "/game.zip", dir + "/unpack" )
+          except : game_error ( "Error extracting" )
+
+          splashy ( "Getting Desktop directory..." )
+          try : desktop = os.path.expanduser ( "~/Desktop" )
+          except : game_error ( "Error getting" )
+
+          splashy ( "Copying..." )
+          try : shutil.copytree ( dir + "/unpack/stupid-game-main", desktop + "/Stupid Game")
+          except : game_error ( "Error copying" )
+      except : game_error ( "Error" )
+
+      game_error ( "Success" )
 
   if not single :
 
@@ -438,28 +484,17 @@ def new ( ) :
                              element = choice ( [ "fire", "air", "earth", "water" ])))
 
 if host :
-  try :
-    server_sock = Listener ( ( "localhost", port ))
-  except :
-    print ( "Could not host game" )
-    pygame.quit ( )
-    quit ( )
+  try : server_sock = Listener ( ( "localhost", port ))
+  except : game_error ( "Could not host game" )
 
 play = True
 while play :
-  draw_game ( )
-  waiting = font.render ( "Waiting for connection..", True, colors [ 0 ] )
-  window.blit ( waiting, ( 160, 250 ))
-  pygame.display.flip ( )
+  if not single : splashy ( "Waiting for connection.." )
   if host :
     conn = server_sock.accept ( )
   if join :
-    try :
-      client = Client ( ( server, port ))
-    except :
-      print ( "Could not connect" )
-      pygame.quit ( )
-      quit ( )
+    try : client = Client ( ( server, port ))
+    except : game_error ( "Could not connect" )
   run = True
   kills = 0
   kills2 = 0
@@ -475,7 +510,6 @@ while play :
   frame = 0
   while run :
     pygame.display.set_icon ( window )
-
     if join :
       var = client.recv ( )
       player = var [ "player" ]
