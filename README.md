@@ -47,4 +47,4 @@ _game control_:
 # installing executable
 - go to releases
 - download the desired version
-If you want to run game.exe, all you need is Windows 7+
+  - if you want to run game.exe, all you need is Windows 7+
