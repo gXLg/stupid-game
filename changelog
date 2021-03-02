@@ -40,7 +40,7 @@ Put game.py, host.py and client.py into one
 Fixed exit issue
 
 27 02 2021
-Fixed color mismatch
+Fixed color mismatch on different pygame versions
 Fixed entity removing in singleplayer
 
 01 03 2021
