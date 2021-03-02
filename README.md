@@ -44,4 +44,7 @@ _game control_:
 - python 3.7 or higher
 - newest pygame module
 
+# installing executable
+- go to releases
+- download the desired version
 If you want to run game.exe, all you need is Windows 7+
