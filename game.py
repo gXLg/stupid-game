@@ -500,7 +500,7 @@ def new ( ) :
                              element = choice ( [ "fire", "air", "earth", "water" ])))
 
 if host :
-  try : server_sock = Listener ( ( "localhost", port ))
+  try : server_sock = Listener ( ( "", port ))
   except : game_error ( "Could not host game" )
 
 play = True
