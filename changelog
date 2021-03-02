@@ -46,8 +46,9 @@ Fixed entity removing in singleplayer
 01 03 2021
 Added GUI at start (still accepting arguments)
 
+02 03 2021
+Tried to add compression to sent variable, none more possible, is already compressed
+
 TO DO:
-Make bots "smarter":
-- (maybe) Make bots use magic
-- Better path-finding than just straight line
-(maybe) Add compression to sent variable
+Add an updater
+(maybe) Make bots use magic
