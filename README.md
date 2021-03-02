@@ -6,7 +6,7 @@ A little pygame based game
 
 _GUI (without arguments)_:
 - Windows : download "game.exe" and just open it
-- Unix : start game.py with python3
+- Unix and Windows : start game.py with python3
 
 
 _conole (with arguments)_:
