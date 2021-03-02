@@ -50,6 +50,7 @@ Added GUI at start (still accepting arguments)
 Tried to add compression to sent variable, none more possible, is already compressed
 Added an updater for repository
 Added an updater for executable
+Fixed an issue with hosting game using dynamic dns
 
 TO DO:
 (maybe) Make bots use magic
