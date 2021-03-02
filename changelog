@@ -48,7 +48,7 @@ Added GUI at start (still accepting arguments)
 
 02 03 2021
 Tried to add compression to sent variable, none more possible, is already compressed
+Added an updater
 
 TO DO:
-Add an updater
 (maybe) Make bots use magic
