@@ -47,4 +47,7 @@ Fixed entity removing in singleplayer
 Added GUI at start (still accepting arguments)
 
 TO DO:
+Make bots "smarter":
+- (maybe) Make bots use magic
+- Better path-finding than just straight line
 (maybe) Add compression to sent variable
