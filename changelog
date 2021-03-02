@@ -36,10 +36,10 @@ Fixed elemental damage on player2
 02 02 2021 v1.5
 Put game.py, host.py and client.py into one
 
-10 02 2021 v1.5.1
+10 02 2021 v1.5
 Fixed exit issue
 
-27 02 2021 v1.5.3
+27 02 2021 v1.5
 Fixed color mismatch on different pygame versions
 Fixed entity removing in singleplayer
 
@@ -48,7 +48,8 @@ Added GUI at start (still accepting arguments)
 
 02 03 2021 v1.7
 Tried to add compression to sent variable, none more possible, is already compressed
-Added an updater
+Added an updater for repository
+Added an updater for executable
 
 TO DO:
 (maybe) Make bots use magic
