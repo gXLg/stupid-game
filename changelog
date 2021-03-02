@@ -1,52 +1,52 @@
-26 01 2021
+26 01 2021 v0.1
 Started working
 Learned basic funtions of pygame
 Built a window with a square
 Added key listener to WASD
 Added sprint function on LSHIFT
 
-27 01 2021
+27 01 2021 v0.2
 Realized idea with cooldown
 Created colorscheme, map and physics
 Added exit and restart buttons
 Added fire buttons on HJK
 Added function barrier to J
 
-28 01 2021
+28 01 2021 v1.0
 Added bots and tracking function
 Made bots hit player
 
-29 01 2021
+29 01 2021 v1.1
 Added class Object for drawing particles and effects
 Made elemental attacks
 
-30 01 2021
+30 01 2021 v1.2
 Added hierarchy of elements
 Created two copies host.py and client.py
 
-31 01 2021
+31 01 2021 v1.3
 Learned about sending object data
 Created player2
 Added key listener on host for WASD, LSHIFT
 
-01 02 2021
+01 02 2021 v1.4
 Changed manual pickle and socket to multiprocess.connection
 Fixed elemental damage on player2
 
-02 02 2021
+02 02 2021 v1.5
 Put game.py, host.py and client.py into one
 
-10 02 2021
+10 02 2021 v1.5.1
 Fixed exit issue
 
-27 02 2021
+27 02 2021 v1.5.3
 Fixed color mismatch on different pygame versions
 Fixed entity removing in singleplayer
 
-01 03 2021
+01 03 2021 v1.6
 Added GUI at start (still accepting arguments)
 
-02 03 2021
+02 03 2021 v1.7
 Tried to add compression to sent variable, none more possible, is already compressed
 Added an updater
 
