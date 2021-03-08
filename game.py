@@ -612,7 +612,6 @@ while play :
       var = { "player" : player, "player2" : player2, "entities" : entities, "low_objects" : low_objects, "top_objects" : top_objects }
       client.send ( var )
 
-    window.fill ( 0 )
     draw_game ( )
     for i in low_objects : i.draw ( )
     for i in entities : i.draw ( )
