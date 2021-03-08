@@ -53,4 +53,5 @@ Added an updater for executable
 Fixed an issue with hosting game using dynamic dns
 
 TO DO:
+Solve issue with slow rendering when many damage indicators
 (maybe) Make bots use magic
